@@ -2,7 +2,12 @@
 
 # TEST de Mercado Libre con React JS & GraphQL
 
-[![npm version](https://badgen.net/npm/v/graphql-react)](https://npm.im/graphql-react)
+![React](https://img.shields.io/badge/-React-%23282C34?logo=react)
+![GraphQl](https://img.shields.io/badge/-GrapQL-%23ea08dd?logo=graphql)
+![CSS3](https://img.shields.io/badge/-CSS3-%231572B6?logo=css3)
+![JavaScript](https://img.shields.io/badge/-JavaScript-%23F7DF1C?&logo=javascript&logoColor=000000&labelColor=%23F7DF1C&color=%23FFCE5A)
+![Nodejs](https://img.shields.io/badge/-Nodejs-black?logo=Node.js)
+![Sass](https://img.shields.io/badge/-Sass-%23CC6699?logo=sass&logoColor=ffffff)
 
 Se creo un servicio de [GraphQL](https://graphql.org) con [React](https://reactjs.org) usando [context](https://reactjs.org/docs/context) y la API de [hooks](https://reactjs.org/docs/hooks-intro) que son lijeras (< 3.5 KB [size limited](https://github.com/ai/size-limit)) pero poderosos; cuidando la optimización de las consultas y la escalabilidad de nodos en GraphQL.
 
