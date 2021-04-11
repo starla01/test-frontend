@@ -1,8 +1,8 @@
 const { GraphQLObjectType, GraphQLString, GraphQLBoolean } = require("graphql");
 
 module.exports = new GraphQLObjectType({
-  name: "Item",
-  description: "Schema de tipo Item",
+  name: "Detail",
+  description: "Schema de tipo Detalle",
   fields: () => ({
     id: {
       type: GraphQLString,
@@ -21,6 +21,10 @@ module.exports = new GraphQLObjectType({
     },
     free_shipping: {
       type: GraphQLBoolean,
+    },
+    description: {
+      type: GraphQLString,
+      resolve: require("../resolvers/get.description"),
     },
     price: {
       type: require("./price"),

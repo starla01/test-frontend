@@ -1,6 +1,13 @@
 const fetch = require("node-fetch");
-module.exports = (parent) => {
-  const uri = `https:\/\/api.mercadolibre.com\/sites\/MLA\/search\?q\=\:retratos&limit=2`;
+
+function decimals(amount) {
+  if (amount.toString().indexOf(".") > 0) {
+    return amount.toString().split(".")[1];
+  } else return 0;
+}
+
+module.exports = (parent, { strSearch }) => {
+  const uri = `https:\/\/api.mercadolibre.com\/sites\/MLA\/search\?q\=\:${strSearch}&limit=4`;
   return fetch(uri, {
     method: "POST",
     headers: {
@@ -9,21 +16,23 @@ module.exports = (parent) => {
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log(JSON.stringify(res.results));
       const results = res.results;
-      return results.map((element, key) => {
-        return {
-          id: "MLID",
-          title: "title",
-          price: {
-            currency: "MXN",
-            amount: 0,
-            decimals: 0,
-          },
-          picture: "",
-          condition: "",
-          free_shipping: false,
-        };
-      });
+      return results.map(
+        ({ id, title, prices, shipping, condition, address, thumbnail }) => {
+          return {
+            id,
+            title,
+            state_name: address?.state_name,
+            price: {
+              currency: prices?.prices[0]?.currency_id,
+              amount: prices?.prices[0]?.amount,
+              decimals: decimals(prices?.prices[0]?.amount),
+            },
+            picture: thumbnail,
+            condition,
+            free_shipping: shipping?.free_shipping,
+          };
+        }
+      );
     });
 };

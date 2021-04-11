@@ -1,5 +1,6 @@
 // Librerias
-import { Switch, Route, useHistory } from "react-router-dom";
+import { useContext } from "react";
+import { Switch, Route } from "react-router-dom";
 import { withRouter } from "react-router";
 import queryString from "query-string";
 
@@ -7,21 +8,36 @@ import queryString from "query-string";
 import ProductDetail from "./components/ProductDetail";
 import Search from "./components/Search";
 import Header from "./components/Header";
+import BreacCrumb from "./components/BreadCrumb";
 
-function App() {
-  const history = useHistory();
+// Context
+import { Context } from "./Providers";
+
+//Styles
+import styles from "./app.sass";
+
+function App({ history }) {
+  const { state, actions } = useContext(Context);
   const params = queryString.parse(history.location.search);
   return (
-    <div className="testMercadoLibre">
+    <div className={styles.testMercadoLibre}>
       <Header />
+      {history.location.pathname !== "/" && (
+        <BreacCrumb state={state} history={history} />
+      )}
       <div>
         <Switch>
           <Route
             exact
             path="/items"
-            children={<Search search={params.search} />}
+            children={
+              <Search search={params.search} actions={actions} state={state} />
+            }
           />
-          <Route path="/items/:id" children={<ProductDetail />} />
+          <Route
+            path="/items/:id"
+            children={<ProductDetail actions={actions} state={state} />}
+          />
         </Switch>
       </div>
       <div className="footer"></div>

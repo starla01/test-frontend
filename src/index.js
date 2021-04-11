@@ -7,14 +7,18 @@ import { createBrowserHistory } from "history";
 import reportWebVitals from "./reportWebVitals";
 
 //States
+import Provider from "./Providers";
+
 const history = createBrowserHistory();
 const container = document.getElementById("root");
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router history={history}>
-      <App history={history} />
-    </Router>
+    <Provider>
+      <Router history={history}>
+        <App history={history} />
+      </Router>
+    </Provider>
   </React.StrictMode>,
   container
 );
